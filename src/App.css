@@ -1,0 +1,105 @@
+
+
+nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 90px;
+    background-color: black;
+}
+
+    nav a {
+        width: 20%;
+        height: 90px;
+        position: relative;
+        top: 30px;
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+    }
+
+
+#img_logo {
+    width: 180px;
+    height: 60px;
+    position: relative;
+    top: -15px;
+    left: 15px;
+}
+
+#contenu_page {
+    display: flex;
+    flex-direction: row;
+    height:800px;
+}
+
+
+#bandeau {
+    width: 8%;
+    height: 100%;
+    background-color: black;
+}
+
+#group_bouton {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 100px;
+
+}
+
+    #group_bouton button {
+        height: 60px;
+        width: 60px;
+        border-radius: 10%;
+        position: relative;
+        left: 50px;
+        background-size: 60px;
+        margin-top: 10px;
+    }
+
+
+#img_copi {
+    width: 23px;
+    height: 140px;
+    position: relative;
+    top: 280px;
+    left: 60px;
+}
+
+
+#meditation {
+    background-image: url(./ressources/meditation.png);
+}
+
+#natation {
+    background-image: url(./ressources/natation.png);
+}
+
+#velo {
+    background-image: url(./ressources/velo.png);
+}
+
+#muscu {
+    background-image: url(./ressources/muscu.png);
+}
+
+
+#com_utilisateur {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -15px;
+    left: 20px;
+}
+
+#salutation {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+}
+
+#message {
+    position: relative;
+    top: -20px;
+}
