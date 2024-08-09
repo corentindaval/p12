@@ -5,11 +5,13 @@ export default function Categorie(props) {
 
     return (
         <div className="categorie">
+          <div id="int_cat">
             <img src={img} />
             <div>
-                <p className="valeur_categorie">{valeur + unite}</p>
+                <p className="valeur_categorie">{valeur +" "+ unite}</p>
                 <p className="type">{type}</p>
             </div>
+          </div>
         </div>
     )
 

@@ -6,7 +6,7 @@ const USER_MAIN_DATA = [
             lastName: 'Dovineau',
             age: 31,
         },
-        todayScore: 0.12,
+        score: 0.12,
         keyData: {
             calorieCount: 1930,
             proteinCount: 155,
@@ -198,28 +198,12 @@ const USER_PERFORMANCE = [
         },
         data: [
             {
-                value: 80,
-                kind: 1
-            },
-            {
-                value: 120,
-                kind: 2
-            },
-            {
-                value: 140,
-                kind: 3
-            },
-            {
-                value: 50,
-                kind: 4
-            },
-            {
-                value: 200,
-                kind: 5
-            },
-            {
-                value: 90,
-                kind: 6
+                cardio: 80,
+                energie: 120,
+                endurance: 140,
+                force: 50,
+                vitesse: 200,
+                intensité: 90,
             }
         ]
     },
@@ -235,28 +219,12 @@ const USER_PERFORMANCE = [
         },
         data: [
             {
-                value: 200,
-                kind: 1
-            },
-            {
-                value: 240,
-                kind: 2
-            },
-            {
-                value: 80,
-                kind: 3
-            },
-            {
-                value: 80,
-                kind: 4
-            },
-            {
-                value: 220,
-                kind: 5
-            },
-            {
-                value: 110,
-                kind: 6
+                cardio: 200,
+                energie: 240,
+                endurance: 80,
+                force: 80,
+                vitesse: 220,
+                intensité: 110,
             }
         ]
     }

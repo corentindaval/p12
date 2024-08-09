@@ -44,7 +44,7 @@ nav {
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 100px;
+    top:10%;
 
 }
 
@@ -53,7 +53,7 @@ nav {
         width: 60px;
         border-radius: 10%;
         position: relative;
-        left: 50px;
+        left: 30%;
         background-size: 60px;
         margin-top: 10px;
     }
@@ -102,4 +102,178 @@ nav {
 #message {
     position: relative;
     top: -20px;
+}
+
+#contenu{
+    width:80%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+#partie_graph{
+    display:flex;
+    flex-direction:row;
+}
+
+#activiter {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+#autre_graph{
+    display:flex;
+    flex-direction:row;
+}
+
+#partie_nutrition{
+    width:20%;
+    height:100%;
+}
+
+
+#partie_msg {
+    width: 80%;
+    height: 20%;
+    margin: 10px;
+    margin-left: 10%;
+
+}
+
+#partie_msg span{
+    display:flex;
+    flex-direction:row;
+    font-family:Roboto;
+    font-size:48px;
+}
+
+    #partie_msg p {
+        margin: 10px;
+    }
+
+
+    .categorie {
+        width: 258px;
+        height: 124px;
+        display: flex;
+        flex-direction: row;
+        border: solid;
+        border-color: #FBFBFB;
+        border-radius: 20px;
+        background-color: #FBFBFB;
+        margin: 10px;
+    }
+
+
+.categorie img {
+    width: 60px;
+    height: 60px;
+    margin:10px;
+}
+
+#int_cat{
+    display:flex;
+    flex-direction:row;
+    margin:10%;
+}
+
+.valeur_categorie {
+    font-weight: bold;
+}
+
+#name{
+    color:red;
+}
+
+
+svg{
+    overflow:visible;
+}
+
+g{
+    color:black;
+}
+
+#graph_activiter_quotidienne {
+    width: 835px;
+    height: 320px;
+    background-color: #FBFBFB;
+    border: solid;
+    border-color: #FBFBFB;
+    border-radius:20px;
+    margin:10px;
+    margin-left:10%;
+}
+
+#graph_duree {
+    width: 263px;
+    height: 263px;
+    border: solid;
+    border-color: #FF0000;
+    border-radius: 20px;
+    background: #FF0000;
+    margin: 10px;
+    margin-left: 10%;
+}
+
+#graph_score {
+    width: 258px;
+    height: 263px;
+    border: solid;
+    border-color: #FBFBFB;
+    border-radius: 20px;
+    background: #FBFBFB;
+    margin: 10px;
+}
+
+#score{
+    position:relative;
+    top:140px;
+    left:140px;
+}
+
+#pourcent{
+    font-weight:bold;
+    position:relative;
+    left:40px;
+    top:20px;
+}
+
+#span_score{
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    top:80px;
+    right:210px;
+}
+
+
+#graph_stats {
+    width: 258px;
+    height: 263px;
+    border: solid;
+    border-color: #282D30;
+    border-radius: 20px;
+    background: #282D30;
+    margin: 10px;
+    position:relative;
+
+}
+
+#label_score{
+    position:relative;
+    top:50px;
+    left:50px;
+    font-weight:bold;
+}
+
+#partie_duree{
+    display:flex;
+    flex-direction:column;
+}
+
+#label_duree{
+    position:relative;
+
 }
