@@ -172,7 +172,7 @@ export default function Graph_activiter_quotidienne() {
             .attr("rx", 8)
             .attr("x", (value, index) => xScale(index))
             .attr("y", yScale)
-            .attr("width", xScale.bandwidth())
+            .attr("width", xScale.bandwidth()-10)
             .attr("height", value => 320 - yScale(value));//remplacer 150 par ymax
 
         svg.selectAll(".cachebar")
@@ -183,7 +183,7 @@ export default function Graph_activiter_quotidienne() {
             .attr("x", (value, index) => xScale(index))
             .attr("y", yScale)
             .style("transform","translateY(10px)")
-            .attr("width", xScale.bandwidth())
+            .attr("width", xScale.bandwidth()-10)
             .attr("height", value => 320 - yScale(value)-8);//remplacer 150 par ymax
         
          
@@ -198,7 +198,7 @@ export default function Graph_activiter_quotidienne() {
             .attr("rx", 8)
             .attr("x", (value, index) => xScale(index) + 25)
             .attr("y", yScale)
-            .attr("width", xScale.bandwidth())
+            .attr("width", xScale.bandwidth()-10)
             .attr("height", value => 320 - yScale(value));
        //remplacer 150 par ymax
 
@@ -210,7 +210,7 @@ export default function Graph_activiter_quotidienne() {
             .attr("x", (value, index) => xScale(index)+25)
             .attr("y", yScale)
             .style("transform", "translateY(10px)")
-            .attr("width", xScale.bandwidth())
+            .attr("width", xScale.bandwidth()-10)
             .attr("height", value => 320 - yScale(value) - 8);//remplacer 150 par ymax
 
 

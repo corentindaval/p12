@@ -78,7 +78,7 @@ export default function Graph_stats() {
         }
         const attributes = Object.keys(data[0])
         const radius = 280;
-        const ticks = [30,60,90,120,150,180,210,240,270,300];
+        const ticks = [30,90,150,210,270];
        
 
         const cordForAngle = (angle, len) => {
