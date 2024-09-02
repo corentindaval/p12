@@ -1,93 +1,13 @@
 ﻿import React, { useRef, useEffect } from "react"
 import { useParams } from 'react-router-dom'
-import { select, axisBottom, scaleLinear, axisRight,scaleBand,min,max,scaleTime, brushX, index } from "d3"
+import { select, axisBottom, scaleLinear, axisRight, scaleBand, min, max, scaleTime, brushX, index } from "d3"
+import getdata from "./data.jsx";
 //import  USER_ACTIVITY  from "../ressources/data.js"
 
 
 const testdata = [25, 30, 45, 100, 20, 65, 75];
 const testdata2 = [20, 40, 5, 100, 20, 65, 75];
-const USER_ACTIVITY = [
-    {
-        userId: 12,
-        sessions: [
-            {
-                day: '2020-07-01',
-                kilogram: 80,
-                calories: 240
-            },
-            {
-                day: '2020-07-02',
-                kilogram: 80,
-                calories: 220
-            },
-            {
-                day: '2020-07-03',
-                kilogram: 81,
-                calories: 280
-            },
-            {
-                day: '2020-07-04',
-                kilogram: 81,
-                calories: 290
-            },
-            {
-                day: '2020-07-05',
-                kilogram: 80,
-                calories: 160
-            },
-            {
-                day: '2020-07-06',
-                kilogram: 78,
-                calories: 162
-            },
-            {
-                day: '2020-07-07',
-                kilogram: 76,
-                calories: 390
-            }
-        ]
-    },
-    {
-        userId: 18,
-        sessions: [
-            {
-                day: '2020-07-01',
-                kilogram: 70,
-                calories: 240
-            },
-            {
-                day: '2020-07-02',
-                kilogram: 69,
-                calories: 220
-            },
-            {
-                day: '2020-07-03',
-                kilogram: 70,
-                calories: 280
-            },
-            {
-                day: '2020-07-04',
-                kilogram: 70,
-                calories: 500
-            },
-            {
-                day: '2020-07-05',
-                kilogram: 69,
-                calories: 160
-            },
-            {
-                day: '2020-07-06',
-                kilogram: 69,
-                calories: 162
-            },
-            {
-                day: '2020-07-07',
-                kilogram: 69,
-                calories: 390
-            }
-        ]
-    }
-]
+
 
 
 function aff_valeur(index) {
@@ -111,7 +31,7 @@ export default function Graph_activiter_quotidienne() {
         const date = dateString.split("-");
     };
 
-    const donnee_utilisateur = USER_ACTIVITY.filter(donnee =>
+    const donnee_utilisateur = getdata()[1].filter(donnee =>
         donnee.userId == id);
     var list_val_kg = [];
     var list_val_cal = [];
@@ -125,6 +45,7 @@ export default function Graph_activiter_quotidienne() {
         index_session += 1;
     });
 
+    const table_val_kg = [ 69, 70, 71];
   
  
     console.log("kg:"+list_val_kg+" cal:"+list_val_cal+" date:"+list_date);//list d'element 0=date,1=kg,2=calorie
@@ -134,6 +55,8 @@ export default function Graph_activiter_quotidienne() {
     useEffect(() => {
         const svg = select(svgref.current);
         //graph1
+
+
         const xScale = scaleBand()
             .domain(list_date.map((value, index) => index))//list valeur des x
             .range([0, 835])
@@ -158,11 +81,65 @@ export default function Graph_activiter_quotidienne() {
             .style("transform", "translateY(320px)")
             .call(xAxis);
 
-        const yAxis = axisRight(yScale);
+        
+
+        const yAxis = axisRight(yScale)
+            .ticks(table_val_kg.length-1)
+            .tickFormat(index => table_val_kg[index]);
+
         svg
             .select(".y-axis")
             .style("transform", "translateX(835px)")
             .call(yAxis);
+
+       
+
+        svg.selectAll(".cacherepere")
+            .data(table_val_kg)
+            .join("rect")
+            .attr("class", "cacherepere")
+            .attr("fill", "white")
+            .call(yAxis)
+            .style("transform", "translatex(830px)")
+            .attr("width", 8)
+            .attr("height", 320);
+
+
+        svg.append('rect')
+            .attr('y', 190)
+            .attr('x', 0)
+            .style('stroke', 'none')
+            .style('fill', 'grey')
+            .style("opacity",0.8)
+            .attr("width", 830)
+            .attr("height", 1);
+
+        svg.append('text')
+            .attr('y', 195)
+            .attr('x', 840)
+            .attr("font-size","12px")
+            .html('70')
+            .style('stroke', 'none')
+            .style('fill', 'black')
+
+        svg.append('rect')
+            .attr('y', 65)
+            .attr('x', 0)
+            .style('stroke', 'none')
+            .style('fill', 'grey')
+            .style("opacity", 0.4)
+            .attr("width", 830)
+            .attr("height", 1);
+
+        svg.append('text')
+            .attr('y', 70)
+            .attr('x', 840)
+            .attr("font-size", "12px")
+            .html('71')
+            .style('stroke', 'none')
+            .style('fill', 'black')
+
+
 
         svg.selectAll(".bar")
             .data(list_val_cal)
@@ -236,24 +213,34 @@ export default function Graph_activiter_quotidienne() {
                 } else if (pos_brush > table_pos[5]) {
                     index_brush = 6;
                 }
+
+                svg.selectAll(".casetool")
+                    .data(list_val_cal)
+                    .join("rect")
+                    .attr("class", "casetool")
+                    .attr("fill", "red")
+                    .attr("x", selection[0]+45)
+                    .attr("y", 0)
+                    .attr("width", 70)
+                    .attr("height",65);//remplacer 150 par ymax
                 svg
                     .selectAll(".tooltip")
                     .data(list_val_cal)
                     .join("text")
                     .attr("class", "tooltip")
                     .text(list_val_cal[index_brush] + " Kcal")
-                    .attr("x", selection[0])
-                    .attr("y",40)
-                    .attr("fill", "black");
+                    .attr("x", selection[0]+50)
+                    .attr("y",50)
+                    .attr("fill", "white");
                 svg
                     .selectAll(".tooltip2")
                     .data(list_val_kg)
                     .join("text")
                     .attr("class", "tooltip2")
                     .text(list_val_kg[index_brush] + " Kg")
-                    .attr("x", selection[0])
+                    .attr("x", selection[0]+50)
                     .attr("y",20)
-                    .attr("fill", "red");
+                    .attr("fill", "white");
 
              
             }
@@ -310,7 +297,7 @@ export default function Graph_activiter_quotidienne() {
             .style('stroke', 'none')
             .style('fill', 'black')
 
-    }, [list_date,list_val_cal,list_val_kg]);
+    }, [list_date,list_val_cal,list_val_kg,table_val_kg]);
     return (
         <React.Fragment>
             <svg id="graph_activiter_quotidienne" ref={svgref}>

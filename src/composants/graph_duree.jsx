@@ -1,120 +1,18 @@
 ﻿import React, { useRef, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import { select, line, curveCardinal, axisBottom, scaleLinear, axisRight, scaleBand, brushX } from "d3"
-import axios from 'axios';
+
+import  getdata  from "./data.jsx";
 //import USER_AVERAGE_SESSIONS from"../ressources/data.js"
 
 const testdata = [25, 30, 45, 60, 20, 65, 75];
 
-
- const mock=false;
-
-function getdata(type){
-    if(mock==true){
-
-    } else {
-        var res = "";
-        if (type == "main") {
-             res = axios.get("http://localhost:3000/user/${userId}");//USER_MAIN_DATA
-        } else if (type == "activity") {
-             res = axios.get("http://localhost:3000/user/${userId}/activity");//USER_ACTIVITY
-        } else if (type == "average") {
-             res = axios.get("http://localhost:3000/user/${userId}/average-sessions")//USER_AVERAGE_SESSIONS
-        } else if (type == "performance") {
-             res = axios.get("http://localhost:3000/user/${userId}/performance")//USER_PERFORMANCE
-        }
-        console.log(res)
-       
-       
-        
-
-
-return res;
-    }
-}
- 
- 
-  
- 
- 
-
-
-
-
 export default function Graph_duree() {
     const { id } = useParams();
 
-    getdata("main");
-    const USER_AVERAGE_SESSIONS = [
-        {
-            userId: 12,
-            sessions: [
-                {
-                    day: 1,
-                    sessionLength: 30
-                },
-                {
-                    day: 2,
-                    sessionLength: 23
-                },
-                {
-                    day: 3,
-                    sessionLength: 45
-                },
-                {
-                    day: 4,
-                    sessionLength: 50
-                },
-                {
-                    day: 5,
-                    sessionLength: 0
-                },
-                {
-                    day: 6,
-                    sessionLength: 0
-                },
-                {
-                    day: 7,
-                    sessionLength: 60
-                }
-            ]
-        },
-        {
-            userId: 18,
-            sessions: [
-                {
-                    day: 1,
-                    sessionLength: 30
-                },
-                {
-                    day: 2,
-                    sessionLength: 40
-                },
-                {
-                    day: 3,
-                    sessionLength: 50
-                },
-                {
-                    day: 4,
-                    sessionLength: 30
-                },
-                {
-                    day: 5,
-                    sessionLength: 30
-                },
-                {
-                    day: 6,
-                    sessionLength: 50
-                },
-                {
-                    day: 7,
-                    sessionLength: 50
-                }
-            ]
-        }
-    ]
+   
 
-    const donnee_utilisateur = USER_AVERAGE_SESSIONS.filter(donnee =>
+    const donnee_utilisateur = getdata()[2].filter(donnee =>
         donnee.userId == id);
     var list_val = [];
     donnee_utilisateur[0].sessions.forEach(function (session) {
@@ -162,12 +60,7 @@ export default function Graph_duree() {
             .html('Durée moyenne des sessions')
             .style('stroke', 'none')
             .style('fill', 'white');
-      /* const yAxis = axisRight(yScale);
-        svg
-            .select(".y-axis")
-            .style("transform", "translateX(200px)")
-            .call(yAxis);
-*/
+      
         const myline = line()
             .x((value, index) => xScale(index)+marge)
             .y(yScale)
@@ -190,21 +83,65 @@ export default function Graph_duree() {
             .attr("r", 2)
             .attr("fill", "white")
             .attr("stroke", "white")
+            .attr("opacity",0)
             .attr("cx", (value, index) => xScale(index) + marge)
             .attr("cy", yScale)
             .on("mouseenter", (value, index) => {
+                svg
+                    .append("rect")
+                    .attr("class", "zone_grise")
+                    .attr("fill", "black")
+                    .attr("opacity", 0.2)
+                    .attr("width", value.x)
+                    .attr("height", 268)
+                    .attr("rx", 20)
+                    .attr('y', -2)
+                    .attr('x', value.x - 280);
+                svg.append("circle")
+                    .attr("class", "v-dot")
+                    .attr("r", 4)
+                    .attr("fill", "white")
+                    .attr("stroke", "white")
+                    .attr("opacity", 1)
+                    .attr("cx", value.x - 280)
+                    .attr("cy", value.y - 620)
+
+                svg
+                    .append("rect")
+                    .attr("class", "case")
+                    .attr("fill", "white")
+                    .attr("opacity", 1)
+                    .attr("width", 50)
+                    .attr("height", 20)
+                    .attr('y', value.y - 615)
+                    .attr('x', value.x - 230);
                 svg
                     .selectAll(".txt_duree")
                     .data([value])
                     .join("text")
                     .attr("class", "txt_duree")
-                    .text(index)
+                    .text(index+" min")
                     .attr("fill", "black")
                     .attr("stroke", "black")
                     .attr("x", value.x -230)
-                    .attr("y", value.y-600);
+                    .attr("y", value.y - 600);
+              
+             
                 
-            });
+            })
+            .on("mouseout", (value, index) => {
+                svg.selectAll(".zone_grise")
+                .remove()
+                svg.selectAll(".txt_duree")
+                    .remove()
+                svg.selectAll(".case")
+                    .remove()
+                svg.selectAll(".v-dot")
+                .remove()
+
+            })
+            ;
+
 
         const yScale2 = scaleLinear()
             .domain([0, 150])
@@ -221,16 +158,7 @@ export default function Graph_duree() {
             .attr("x", (value, index) => xScale(index) + marge)
             .attr("y", yScale2);
             */
-        svg
-            .append("rect")
-            .attr("class", "zone_grise")
-            .attr("fill", "black")
-            .attr("opacity", 0.2)
-            .attr("width", 96)
-            .attr("height", 268)
-            .attr("rx",20)
-            .attr('y', -2)
-            .attr('x', 170);
+       
 
        
 

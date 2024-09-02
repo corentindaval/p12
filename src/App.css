@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 body{
-    font-family:roboto;
+    font-family:"Roboto", sans-serif;
 }
 nav {
     display: flex;
@@ -144,12 +144,12 @@ nav {
 
 }
 
-#partie_msg span{
-    display:flex;
-    flex-direction:row;
-    font-family:Roboto;
-    font-size:48px;
-}
+    #partie_msg span {
+        display: flex;
+        flex-direction: row;
+        font-family: "Roboto", sans-serif;
+        font-size: 48px;
+    }
 
     #partie_msg p {
         margin: 10px;
@@ -228,16 +228,19 @@ g{
     border-radius: 20px;
     background: #FBFBFB;
     margin: 10px;
+    z-index:0;
 }
 
 #score{
     position:relative;
     top:140px;
     left:140px;
+    z-index:1;
 }
 
 #pourcent{
     font-weight:bold;
+    z-index:2;
     position:relative;
     left:40px;
     top:20px;

@@ -1,58 +1,13 @@
 ﻿import React, { useRef, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import { select, line, curveCardinal, axisBottom, scaleLinear, axisRight, arc, pie } from "d3"
+import getdata from "./data.jsx";
 //import USER_PERFORMANCE from"../ressources/data.js"
-
-const USER_PERFORMANCE = [
-    {
-        userId: 12,
-        kind: {
-            1: 'cardio',
-            2: 'energy',
-            3: 'endurance',
-            4: 'strength',
-            5: 'speed',
-            6: 'intensity'
-        },
-        data: [
-            {
-                cardio: 80,
-                energie: 120,
-                endurance: 140,
-                force: 50,
-                vitesse: 200,
-                intensité: 90,
-            }
-        ]
-    },
-    {
-        userId: 18,
-        kind: {
-            1: 'cardio',
-            2: 'energy',
-            3: 'endurance',
-            4: 'strength',
-            5: 'speed',
-            6: 'intensity'
-        },
-        data: [
-            {
-                cardio: 200,
-                energie: 240,
-                endurance: 80,
-                force: 80,
-                vitesse: 220,
-                intensité: 110,
-            }
-        ]
-    }]
-
-
 
 export default function Graph_stats() {
 
     const { id } = useParams();
-    const donnee_utilisateur = USER_PERFORMANCE.filter(donnee =>
+    const donnee_utilisateur = getdata()[3].filter(donnee =>
         donnee.userId == id);
     const data = donnee_utilisateur[0].data;
 
